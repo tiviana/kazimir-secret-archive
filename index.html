@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KAZIMIR — Secret Archive · Дело № KZ-001</title>
+  <meta name="description" content="Учебное исследование шрифта Kazimir (CSTM Fonts) в концепции «Секретный архив». НИУ ВШЭ, Дизайн, 2026.">
+
+  <!-- Шрифты. Old Standard TT — временная замена Kazimir (Kazimir — платный шрифт,
+       его файл нельзя выкладывать в открытый репозиторий). Inter — подписи и навигация. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- =====================================================
+       БЕГУЩАЯ СТРОКА. Текст повторён дважды, чтобы лента
+       шла по кругу без разрыва (см. .ticker в CSS).
+       ===================================================== -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>Case № KZ-001</span><span>Classified type investigation</span><span>Kazimir</span><span>Расследование формы</span><span>Evidence 01–30</span>
+      <span>Case № KZ-001</span><span>Classified type investigation</span><span>Kazimir</span><span>Расследование формы</span><span>Evidence 01–30</span>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       ШАПКА: логотип и меню. На телефоне меню
+       прокручивается вбок пальцем.
+       ===================================================== -->
+  <header class="site-header">
+    <a class="site-header__logo" href="#top">KZ<span class="site-header__logo-red">—</span>001</a>
+    <nav class="site-header__menu" aria-label="Разделы сайта">
+      <a class="menu-link" href="#case-file">Case file</a>
+      <a class="menu-link" href="#type-analysis">Type analysis</a>
+      <a class="menu-link" href="#specimens">Specimens</a>
+      <a class="menu-link menu-link--red" href="#evidence-gallery">Evidence gallery</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- =====================================================
+         1. ОБЛОЖКА
+         data-text у заголовка нужен для красной «копии-ошибки»
+         (она рисуется в CSS через ::before).
+         ===================================================== -->
+    <section class="hero">
+      <p class="hero__label">Type investigation / 2026</p>
+
+      <h1 class="hero__title" data-text="KAZIMIR">KAZIMIR</h1>
+      <p class="hero__stamp">Classified</p>
+
+      <div class="hero__bottom">
+        <p class="hero__subtitle">Дело № KZ-001.<br>Расследование формы</p>
+
+        <!-- Карточка дела -->
+        <div class="case-card">
+          <p class="case-card__row"><span>Объект</span> шрифт Kazimir</p>
+          <p class="case-card__row"><span>Исследователь</span> Во Тху Тхао</p>
+          <p class="case-card__row"><span>Группа</span> БД26З09</p>
+          <!-- «Засекреченный» текст: открывается при наведении -->
+          <p class="case-card__row"><span>Улика</span> <mark class="redacted" tabindex="0">каждая буква</mark></p>
+        </div>
+      </div>
+
+      <div class="hero__buttons">
+        <a class="button" href="#case-file">Открыть дело</a>
+        <a class="button button--ghost" href="#evidence-gallery">30 улик →</a>
+      </div>
+
+      <p class="hero__note">«Секретный архив» — художественная метафора исследования, а не реальный архив.</p>
+    </section>
+
+    <!-- =====================================================
+         2. CASE FILE — папка с делом
+         ===================================================== -->
+    <section class="section section--paper" id="case-file">
+      <header class="section-head">
+        <p class="section-head__number">01</p>
+        <div>
+          <p class="section-head__code">Exhibit 03</p>
+          <h2 class="section-head__title">Case file</h2>
+        </div>
+      </header>
+
+      <div class="folder">
+        <p class="folder__tab">Kazimir · идентификация</p>
+
+        <div class="folder__inside">
+          <!-- Лист с проверенными фактами -->
+          <div class="paper-sheet">
+            <p class="paper-sheet__name">Kazimir</p>
+            <dl class="facts">
+              <dt>Создатели</dt>   <dd>Илья Рудерман, Юрий Остроменцкий</dd>
+              <dt>Студия</dt>      <dd>CSTM Fonts, Москва</dd>
+              <dt>Выпуск</dt>      <dd>начало 2015 года</dd>
+              <dt>Тип</dt>         <dd>высококонтрастная антиква нового стиля</dd>
+              <dt>Начертания</dt>  <dd>Light – Black с курсивами, вариативные версии, Kazimir Text</dd>
+              <dt>Скрипты</dt>     <dd>латиница и кириллица</dd>
+            </dl>
+            <a class="button button--dark" href="https://type.today/en/kazimir" target="_blank" rel="noopener">Официальная страница</a>
+          </div>
+
+          <!-- Исторический источник -->
+          <div class="source">
+            <p class="source__year">1900</p>
+            <p class="source__text">Отправная точка Kazimir — текстовый шрифт книги П. Н. Полевого «История русской литературы», изданной А. Ф. Марксом в 1900 году (по данным type.today).</p>
+            <p class="source__text">Это не возрождение старого шрифта: в интервью AIGA Eye on Design Илья Рудерман говорит, что авторов интересовала идея внезапных ошибок раннего русского набора.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         3. TYPE ANALYSIS — три признака шрифта
+         ===================================================== -->
+    <section class="section section--dark" id="type-analysis">
+      <header class="section-head">
+        <p class="section-head__number">02</p>
+        <div>
+          <p class="section-head__code">Specimen 07</p>
+          <h2 class="section-head__title">Type analysis</h2>
+        </div>
+      </header>
+
+      <div class="exhibits">
+        <article class="exhibit">
+          <p class="exhibit__index">A · контраст</p>
+          <p class="exhibit__glyph">О</p>
+          <p class="exhibit__text">Высокий: студия описывает Kazimir как high-contrast modern serif. Вертикали толстые, соединения тонкие.</p>
+        </article>
+        <article class="exhibit">
+          <p class="exhibit__index">B · засечки</p>
+          <p class="exhibit__glyph">Ш</p>
+          <p class="exhibit__text">Тонкие окончания продолжают логику контраста. Детали нужно сверять на оригинальных глифах.</p>
+        </article>
+        <article class="exhibit">
+          <p class="exhibit__index">C · пропорции</p>
+          <p class="exhibit__glyph exhibit__glyph--red">И</p>
+          <p class="exhibit__text">Слегка сужённые, с длинными выносными элементами — по описанию type.today.</p>
+        </article>
+      </div>
+      <p class="hint">Наведи на букву, чтобы проявить форму.</p>
+    </section>
+
+    <!-- =====================================================
+         4. SPECIMENS — алфавит и знаки
+         ===================================================== -->
+    <section class="section section--paper" id="specimens">
+      <header class="section-head">
+        <p class="section-head__number">03</p>
+        <div>
+          <p class="section-head__code">Specimen 11</p>
+          <h2 class="section-head__title">Specimens</h2>
+        </div>
+      </header>
+
+      <!-- glyph-cell--marked = красная рамка: характерные кириллические буквы -->
+      <div class="alphabet">
+        <span class="glyph-cell">А</span><span class="glyph-cell">Б</span><span class="glyph-cell">В</span>
+        <span class="glyph-cell">Г</span><span class="glyph-cell">Д</span><span class="glyph-cell">Е</span>
+        <span class="glyph-cell">Ё</span><span class="glyph-cell glyph-cell--marked">Ж</span><span class="glyph-cell">З</span>
+        <span class="glyph-cell">И</span><span class="glyph-cell">Й</span><span class="glyph-cell">К</span>
+        <span class="glyph-cell">Л</span><span class="glyph-cell">М</span><span class="glyph-cell">Н</span>
+        <span class="glyph-cell">О</span><span class="glyph-cell">П</span><span class="glyph-cell">Р</span>
+        <span class="glyph-cell">С</span><span class="glyph-cell">Т</span><span class="glyph-cell">У</span>
+        <span class="glyph-cell glyph-cell--marked">Ф</span><span class="glyph-cell">Х</span><span class="glyph-cell">Ц</span>
+        <span class="glyph-cell">Ч</span><span class="glyph-cell">Ш</span><span class="glyph-cell glyph-cell--marked">Щ</span>
+        <span class="glyph-cell">Ъ</span><span class="glyph-cell">Ы</span><span class="glyph-cell">Ь</span>
+        <span class="glyph-cell">Э</span><span class="glyph-cell">Ю</span><span class="glyph-cell glyph-cell--marked">Я</span>
+      </div>
+
+      <p class="specimen-line">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+      <p class="specimen-line specimen-line--grey">0123456789 «» — № &amp; ?! Ѣѣ Ѳѳ Ѵѵ</p>
+      <p class="specimen-caption">Образцы набраны шрифтом-заменой Old Standard TT. Наличие каждого знака нужно сверить по файлу Kazimir.</p>
+    </section>
+
+    <!-- =====================================================
+         5. EVIDENCE GALLERY — 30 композиций, 6 серий.
+         Картинки — SVG в теге <object>: так внутри SVG
+         подгружаются шрифты (в <img> они не загрузятся).
+         На телефоне каждая серия листается вбок пальцем.
+         ===================================================== -->
+    <section class="section section--dark" id="evidence-gallery">
+      <header class="section-head">
+        <p class="section-head__number">04</p>
+        <div>
+          <p class="section-head__code">Evidence 01–30</p>
+          <h2 class="section-head__title">Evidence gallery</h2>
+        </div>
+      </header>
+
+      <!-- Ярлыки серий, как закладки на папках -->
+      <nav class="series-tabs" aria-label="Серии экспериментов">
+        <a class="series-tabs__link" href="#series-1">E-01 Масштаб</a>
+        <a class="series-tabs__link" href="#series-2">E-02 Ритм</a>
+        <a class="series-tabs__link" href="#series-3">E-03 Композиция</a>
+        <a class="series-tabs__link" href="#series-4">E-04 Контраст</a>
+        <a class="series-tabs__link" href="#series-5">E-05 Буква</a>
+        <a class="series-tabs__link" href="#series-6">E-06 Инфографика</a>
+      </nav>
+
+      <!-- Серия E-01 -->
+      <div class="series" id="series-1">
+        <h3 class="series__title"><span>E-01</span> Масштаб</h3>
+        <div class="evidence-row">
+          <a class="evidence" href="images/evidence/evidence-01.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-01.svg" type="image/svg+xml" aria-label="Evidence 01"></object>
+            <span class="evidence__number">Evidence 01</span><span class="evidence__title">Объект № 001</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-02.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-02.svg" type="image/svg+xml" aria-label="Evidence 02"></object>
+            <span class="evidence__number">Evidence 02</span><span class="evidence__title">Потерянный фрагмент</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-03.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-03.svg" type="image/svg+xml" aria-label="Evidence 03"></object>
+            <span class="evidence__number">Evidence 03</span><span class="evidence__title">Увеличение улики</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-04.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-04.svg" type="image/svg+xml" aria-label="Evidence 04"></object>
+            <span class="evidence__number">Evidence 04</span><span class="evidence__title">Под микроскопом</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-05.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-05.svg" type="image/svg+xml" aria-label="Evidence 05"></object>
+            <span class="evidence__number">Evidence 05</span><span class="evidence__title">Частичное раскрытие</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Серия E-02 -->
+      <div class="series" id="series-2">
+        <h3 class="series__title"><span>E-02</span> Ритм и повторение</h3>
+        <div class="evidence-row">
+          <a class="evidence" href="images/evidence/evidence-06.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-06.svg" type="image/svg+xml" aria-label="Evidence 06"></object>
+            <span class="evidence__number">Evidence 06</span><span class="evidence__title">Регистрация</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-07.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-07.svg" type="image/svg+xml" aria-label="Evidence 07"></object>
+            <span class="evidence__number">Evidence 07</span><span class="evidence__title">Сбой интервала</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-08.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-08.svg" type="image/svg+xml" aria-label="Evidence 08"></object>
+            <span class="evidence__number">Evidence 08</span><span class="evidence__title">Двойной оттиск</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-09.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-09.svg" type="image/svg+xml" aria-label="Evidence 09"></object>
+            <span class="evidence__number">Evidence 09</span><span class="evidence__title">Пропуск в записи</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-10.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-10.svg" type="image/svg+xml" aria-label="Evidence 10"></object>
+            <span class="evidence__number">Evidence 10</span><span class="evidence__title">Зашифрованный ряд</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Серия E-03 -->
+      <div class="series" id="series-3">
+        <h3 class="series__title"><span>E-03</span> Композиция</h3>
+        <div class="evidence-row">
+          <a class="evidence" href="images/evidence/evidence-11.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-11.svg" type="image/svg+xml" aria-label="Evidence 11"></object>
+            <span class="evidence__number">Evidence 11</span><span class="evidence__title">Показание у края</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-12.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-12.svg" type="image/svg+xml" aria-label="Evidence 12"></object>
+            <span class="evidence__number">Evidence 12</span><span class="evidence__title">Смещение центра</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-13.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-13.svg" type="image/svg+xml" aria-label="Evidence 13"></object>
+            <span class="evidence__number">Evidence 13</span><span class="evidence__title">Вертикальное досье</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-14.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-14.svg" type="image/svg+xml" aria-label="Evidence 14"></object>
+            <span class="evidence__number">Evidence 14</span><span class="evidence__title">Нарушение сетки</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-15.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-15.svg" type="image/svg+xml" aria-label="Evidence 15"></object>
+            <span class="evidence__number">Evidence 15</span><span class="evidence__title">Комната хранения</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Серия E-04 -->
+      <div class="series" id="series-4">
+        <h3 class="series__title"><span>E-04</span> Контраст и плотность</h3>
+        <div class="evidence-row">
+          <a class="evidence" href="images/evidence/evidence-16.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-16.svg" type="image/svg+xml" aria-label="Evidence 16"></object>
+            <span class="evidence__number">Evidence 16</span><span class="evidence__title">Голос и шёпот</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-17.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-17.svg" type="image/svg+xml" aria-label="Evidence 17"></object>
+            <span class="evidence__number">Evidence 17</span><span class="evidence__title">Плотность свидетельств</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-18.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-18.svg" type="image/svg+xml" aria-label="Evidence 18"></object>
+            <span class="evidence__number">Evidence 18</span><span class="evidence__title">Цветовое противоречие</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-19.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-19.svg" type="image/svg+xml" aria-label="Evidence 19"></object>
+            <span class="evidence__number">Evidence 19</span><span class="evidence__title">Сжатие</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-20.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-20.svg" type="image/svg+xml" aria-label="Evidence 20"></object>
+            <span class="evidence__number">Evidence 20</span><span class="evidence__title">Зона запрета</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Серия E-05 -->
+      <div class="series" id="series-5">
+        <h3 class="series__title"><span>E-05</span> Буква как улика</h3>
+        <div class="evidence-row">
+          <a class="evidence" href="images/evidence/evidence-21.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-21.svg" type="image/svg+xml" aria-label="Evidence 21"></object>
+            <span class="evidence__number">Evidence 21</span><span class="evidence__title">Фрагмент № 01</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-22.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-22.svg" type="image/svg+xml" aria-label="Evidence 22"></object>
+            <span class="evidence__number">Evidence 22</span><span class="evidence__title">Разделение объекта</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-23.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-23.svg" type="image/svg+xml" aria-label="Evidence 23"></object>
+            <span class="evidence__number">Evidence 23</span><span class="evidence__title">Две версии показания</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-24.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-24.svg" type="image/svg+xml" aria-label="Evidence 24"></object>
+            <span class="evidence__number">Evidence 24</span><span class="evidence__title">Точка происхождения</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-25.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-25.svg" type="image/svg+xml" aria-label="Evidence 25"></object>
+            <span class="evidence__number">Evidence 25</span><span class="evidence__title">Засекреченная буква</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Серия E-06 -->
+      <div class="series" id="series-6">
+        <h3 class="series__title"><span>E-06</span> Типографика как графика</h3>
+        <div class="evidence-row">
+          <a class="evidence" href="images/evidence/evidence-26.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-26.svg" type="image/svg+xml" aria-label="Evidence 26"></object>
+            <span class="evidence__number">Evidence 26</span><span class="evidence__title">Каталог экспонатов</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-27.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-27.svg" type="image/svg+xml" aria-label="Evidence 27"></object>
+            <span class="evidence__number">Evidence 27</span><span class="evidence__title">Карта связей</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-28.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-28.svg" type="image/svg+xml" aria-label="Evidence 28"></object>
+            <span class="evidence__number">Evidence 28</span><span class="evidence__title">Шкала свидетельств</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-29.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-29.svg" type="image/svg+xml" aria-label="Evidence 29"></object>
+            <span class="evidence__number">Evidence 29</span><span class="evidence__title">Сводка дела</span>
+          </a>
+          <a class="evidence" href="images/evidence/evidence-30.svg" target="_blank">
+            <object class="evidence__image" data="images/evidence/evidence-30.svg" type="image/svg+xml" aria-label="Evidence 30"></object>
+            <span class="evidence__number">Evidence 30</span><span class="evidence__title">Главная улика</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         6. ЗАКЛЮЧЕНИЕ — выводы и ссылки проекта
+         ===================================================== -->
+    <section class="section section--paper" id="conclusion">
+      <header class="section-head">
+        <p class="section-head__number">05</p>
+        <div>
+          <p class="section-head__code">Case notes 25</p>
+          <h2 class="section-head__title">Дело закрыто?</h2>
+        </div>
+        <p class="stamp-small">Case reviewed</p>
+      </header>
+
+      <ol class="conclusions">
+        <li>Kazimir переосмысляет книжный набор рубежа XIX–XX веков, а не копирует его.</li>
+        <li>Высокий контраст и сужённые пропорции лучше всего раскрываются в крупных кеглях.</li>
+        <li>Для длинного текста есть Kazimir Text; набор Irregular — инструмент акцента.</li>
+        <li>Кириллица — полноценная часть рисунка: шрифт уместен в культурных и издательских проектах.</li>
+      </ol>
+
+      <!-- Ссылки проекта. Когда появится ссылка на Figma — замени <span> на <a href="..."> -->
+      <div class="project-links">
+        <span class="button button--dark button--disabled">Figma — скоро</span>
+        <a class="button button--dark" href="https://github.com/tiviana/kazimir-secret-archive" target="_blank" rel="noopener">GitHub</a>
+        <a class="button button--dark" href="https://type.today/en/kazimir" target="_blank" rel="noopener">Kazimir на type.today</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       ПОДВАЛ
+       ===================================================== -->
+  <footer class="site-footer">
+    <p class="site-footer__big">KZ-001</p>
+    <div class="site-footer__info">
+      <p>Во Тху Тхао · группа БД26З09</p>
+      <p>НИУ ВШЭ · Дизайн · Арт-практика / типографика · 2026</p>
+    </div>
+    <div class="site-footer__info">
+      <p class="site-footer__label">Источники · обращение 27.10.2026</p>
+      <p>
+        <a href="https://type.today/en/kazimir" target="_blank" rel="noopener">type.today</a> ·
+        <a href="https://eyeondesign.aiga.org/dont-call-it-a-revival-kazimir-font-is-inspired-by-type-errors-in-early-russian-printing/" target="_blank" rel="noopener">AIGA Eye on Design</a> ·
+        <a href="https://fontstand.com/fonts/kazimir" target="_blank" rel="noopener">Fontstand</a> ·
+        <a href="https://typenetwork.com/articles/type-network-heads-east-with-cstm-fonts" target="_blank" rel="noopener">Type Network</a>
+      </p>
+      <p>Образцы набраны Old Standard TT (SIL Open Font License) вместо Kazimir.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
