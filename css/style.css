@@ -1,43 +1,39 @@
 /* =========================================================
    KAZIMIR — SECRET ARCHIVE · стили сайта
-   Только CSS, без JavaScript.
+   Простая версия: только HTML и CSS, без JavaScript.
 
-   Содержание файла:
+   Содержание:
    1.  Переменные
    2.  Общие настройки
-   3.  Бегущая строка
-   4.  Шапка и меню
-   5.  Кнопки
-   6.  Обложка
-   7.  Секции и заголовки секций
-   8.  Case file (папка)
-   9.  Type analysis (экспонаты)
-   10. Specimens (алфавит)
-   11. Evidence gallery (галерея)
-   12. Заключение
-   13. Подвал
-   14. Появление при прокрутке
-   15. Адаптив: планшет и телефон
-   16. Если анимации выключены в системе
+   3.  Шапка и меню
+   4.  Кнопки
+   5.  Обложка
+   6.  Секции
+   7.  Case file
+   8.  Type analysis
+   9.  Specimens
+   10. Evidence gallery
+   11. Заключение
+   12. Подвал
+   13. Адаптив
    ========================================================= */
 
 
-/* ---------- 1. ПЕРЕМЕННЫЕ ----------
-   Меняешь значение здесь — меняется на всём сайте. */
+/* ---------- 1. ПЕРЕМЕННЫЕ ---------- */
 :root {
   --black: #171918;   /* Archive Black */
   --paper: #E9E4D9;   /* Evidence Paper */
   --red:   #B83235;   /* Evidence Red */
   --green: #35483D;   /* Case Green */
-  --grey:  #8D8B83;   /* Dust Grey — подписи на тёмном фоне */
-  --ink:   #5A5852;   /* тёмно-серый — подписи на светлом фоне */
+  --grey:  #8D8B83;   /* подписи на тёмном фоне */
+  --ink:   #5A5852;   /* подписи на светлом фоне */
   --line:  #2E302F;   /* тонкие линии на тёмном фоне */
 
-  /* Kazimir первым: если он легально установлен на компьютере, браузер его возьмёт */
+  /* Kazimir первым: если он установлен на компьютере, браузер его возьмёт */
   --serif: "Kazimir", "Old Standard TT", Georgia, serif;
   --sans:  "Inter", Arial, sans-serif;
 
-  --side: 64px;       /* поля страницы слева и справа */
+  --side: 64px;       /* поля слева и справа */
 }
 
 
@@ -49,7 +45,7 @@
 }
 
 html {
-  scroll-behavior: smooth;   /* плавная прокрутка к разделам */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -58,75 +54,33 @@ body {
   font-family: var(--sans);
   font-size: 18px;
   line-height: 1.5;
-  overflow-x: hidden;        /* страховка от горизонтальной прокрутки */
 }
 
 a {
   color: inherit;
 }
 
-/* Видимая рамка фокуса для клавиатуры */
-a:focus-visible,
-.redacted:focus-visible {
-  outline: 2px solid var(--red);
-  outline-offset: 4px;
-}
 
-
-/* ---------- 3. БЕГУЩАЯ СТРОКА ----------
-   Лента сдвигается на половину своей ширины и начинается заново.
-   Текст в HTML повторён дважды, поэтому стык не виден. */
-.ticker {
-  overflow: hidden;
-  background: var(--red);
-  color: var(--paper);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.ticker__track {
-  display: inline-flex;
-  animation: ticker-move 30s linear infinite;
-}
-
-.ticker__track span {
-  padding: 8px 24px;
-}
-
-.ticker__track span::after {
-  content: "·";
-  margin-left: 48px;
-}
-
-@keyframes ticker-move {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-
-/* ---------- 4. ШАПКА И МЕНЮ ---------- */
+/* ---------- 3. ШАПКА И МЕНЮ ---------- */
 .site-header {
-  position: sticky;          /* прилипает к верху экрана */
+  position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 24px;
   padding: 18px var(--side);
-  background: rgba(23, 25, 24, 0.92);
+  background: var(--black);
   border-bottom: 1px solid var(--line);
 }
 
 .site-header__logo {
-  flex-shrink: 0;              /* логотип не сжимается */
+  flex-shrink: 0;
   font-family: var(--serif);
-  font-size: 26px;
+  font-size: 24px;
   text-decoration: none;
-  white-space: nowrap;         /* «KZ—001» всегда в одну строку */
+  white-space: nowrap;
 }
 
 .site-header__logo-red {
@@ -138,32 +92,18 @@ a:focus-visible,
   gap: 28px;
 }
 
-/* Пункт меню: красная линия прочерчивается слева направо */
 .menu-link {
-  position: relative;
   font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
 }
 
-.menu-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 2px;
-  background: var(--red);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.menu-link:hover::after,
-.menu-link:focus-visible::after {
-  transform: scaleX(1);
+.menu-link:hover {
+  border-bottom-color: var(--red);
 }
 
 .menu-link--red {
@@ -171,15 +111,11 @@ a:focus-visible,
 }
 
 
-/* ---------- 5. КНОПКИ ----------
-   Красная заливка въезжает слева, буквы раздвигаются,
-   при нажатии кнопка «бьёт», как штамп. */
+/* ---------- 4. КНОПКИ ----------
+   При наведении кнопка заливается красным. */
 .button {
-  position: relative;
-  isolation: isolate;          /* чтобы заливка (z-index:-1) была внутри кнопки */
-  overflow: hidden;
   display: inline-block;
-  padding: 16px 28px;
+  padding: 14px 26px;
   border: 2px solid var(--red);
   color: var(--paper);
   font-size: 13px;
@@ -187,75 +123,28 @@ a:focus-visible,
   letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: color 0.3s ease, letter-spacing 0.3s ease, transform 0.15s ease;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-.button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
+.button:hover {
   background: var(--red);
-  transform: translateX(-101%);
-  transition: transform 0.35s ease;
-}
-
-.button:hover::before,
-.button:focus-visible::before {
-  transform: translateX(0);
-}
-
-.button:hover,
-.button:focus-visible {
   color: var(--paper);
-  letter-spacing: 0.22em;
 }
 
-.button:active {
-  transform: translate(2px, 2px) rotate(-1.5deg);
-}
-
-/* Прозрачная кнопка с серой рамкой */
 .button--ghost {
   border-color: var(--grey);
 }
 
-/* Тёмный текст — для светлых разделов */
 .button--dark {
   color: var(--black);
 }
 
-/* Неактивная кнопка (ссылки ещё нет) */
-.button--disabled {
-  border-style: dashed;
-  border-color: var(--ink);
-  color: var(--ink);
-  cursor: not-allowed;
-}
 
-.button--disabled::before {
-  display: none;
-}
-
-.button--disabled:hover {
-  color: var(--ink);
-  letter-spacing: 0.16em;
-}
-
-
-/* ---------- 6. ОБЛОЖКА ---------- */
+/* ---------- 5. ОБЛОЖКА ---------- */
 .hero {
   position: relative;
   overflow: hidden;
-  min-height: calc(100vh - 100px);
-  padding: 48px var(--side) 56px;
-  display: flex;
-  flex-direction: column;
-  /* тонкая архивная сетка на фоне */
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 64px 64px;
+  padding: 56px var(--side) 72px;
 }
 
 .hero__label {
@@ -266,54 +155,26 @@ a:focus-visible,
   text-transform: uppercase;
 }
 
-/* Огромное слово. Края обрезаются экраном — это часть идеи. */
 .hero__title {
-  position: relative;
-  z-index: 0;                  /* свой слой: красная копия ляжет под буквы, но над фоном */
-  margin: 32px 0 0 -0.07em;
+  margin-top: 24px;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(96px, 23vw, 420px);
-  line-height: 0.8;
-  letter-spacing: -0.03em;
+  font-size: clamp(72px, 18vw, 320px);
+  line-height: 0.85;
   white-space: nowrap;
 }
 
-/* Красная копия заголовка — «ошибка набора» (DEVIATION).
-   Текст берётся из атрибута data-text. */
-.hero__title::before {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
-  color: var(--red);
-  animation: deviation 1.2s ease-out 0.3s both;
-}
-
-@keyframes deviation {
-  from { transform: translate(0, 0); opacity: 0; }
-  to   { transform: translate(0.04em, 0.03em); opacity: 1; }
-}
-
-/* Штамп CLASSIFIED «ударяет» при загрузке */
 .hero__stamp {
-  position: absolute;
-  top: 140px;
-  right: var(--side);
-  padding: 10px 22px;
-  border: 4px solid var(--red);
+  display: inline-block;
+  margin-top: 24px;
+  padding: 8px 18px;
+  border: 3px solid var(--red);
   color: var(--red);
-  font-size: clamp(18px, 2.4vw, 32px);
+  font-size: 20px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  animation: stamp-hit 0.5s ease-out 1s both;
-}
-
-@keyframes stamp-hit {
-  from { opacity: 0; transform: rotate(-8deg) scale(2); }
-  to   { opacity: 1; transform: rotate(-8deg) scale(1); }
+  transform: rotate(-4deg);
 }
 
 .hero__bottom {
@@ -321,20 +182,18 @@ a:focus-visible,
   justify-content: space-between;
   align-items: flex-end;
   gap: 40px;
-  margin-top: auto;            /* прижимаем к низу экрана */
-  padding-top: 48px;
+  margin-top: 40px;
 }
 
 .hero__subtitle {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(30px, 4vw, 64px);
-  line-height: 1.05;
+  font-size: clamp(28px, 3.6vw, 56px);
+  line-height: 1.1;
 }
 
-/* Карточка дела */
 .case-card {
-  width: 380px;
+  width: 360px;
   flex-shrink: 0;
   border-top: 1px solid var(--grey);
 }
@@ -355,28 +214,6 @@ a:focus-visible,
   text-transform: uppercase;
 }
 
-/* Засекреченный текст: чёрная плашка уезжает при наведении */
-.redacted {
-  position: relative;
-  background: none;
-  color: var(--paper);
-  cursor: help;
-}
-
-.redacted::after {
-  content: "";
-  position: absolute;
-  inset: -2px -4px;
-  background: var(--paper);
-  transform-origin: right;
-  transition: transform 0.4s ease;
-}
-
-.redacted:hover::after,
-.redacted:focus::after {
-  transform: scaleX(0);
-}
-
 .hero__buttons {
   display: flex;
   flex-wrap: wrap;
@@ -385,17 +222,16 @@ a:focus-visible,
 }
 
 .hero__note {
-  margin-top: 24px;
+  margin-top: 20px;
   color: var(--grey);
   font-size: 13px;
 }
 
 
-/* ---------- 7. СЕКЦИИ ---------- */
+/* ---------- 6. СЕКЦИИ ---------- */
 .section {
-  position: relative;
-  padding: 120px var(--side);
-  scroll-margin-top: 90px;    /* шапка не закрывает заголовок */
+  padding: 96px var(--side);
+  scroll-margin-top: 70px;   /* шапка не закрывает заголовок */
 }
 
 .section--paper {
@@ -408,21 +244,11 @@ a:focus-visible,
   color: var(--paper);
 }
 
-/* Заголовок секции: огромный контурный номер + код + название */
 .section-head {
-  position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 32px;
-  margin-bottom: 64px;
-}
-
-.section-head__number {
-  font-family: var(--serif);
-  font-size: clamp(96px, 14vw, 220px);
-  line-height: 0.75;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--red);   /* только контур цифры */
+  gap: 24px;
+  margin-bottom: 48px;
 }
 
 .section-head__code {
@@ -436,66 +262,47 @@ a:focus-visible,
 .section-head__title {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(44px, 6vw, 96px);
+  font-size: clamp(40px, 5vw, 80px);
   line-height: 1;
 }
 
 
-/* ---------- 8. CASE FILE: папка ---------- */
-.folder {
-  position: relative;
-  padding-top: 44px;           /* место для ярлыка папки */
-}
-
-/* Ярлык папки сверху */
+/* ---------- 7. CASE FILE ---------- */
 .folder__tab {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 12px 28px;
+  display: inline-block;
+  padding: 10px 24px;
   background: var(--green);
   color: var(--paper);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  border-radius: 8px 8px 0 0;
 }
 
 .folder__inside {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 32px;
-  padding: 40px;
+  padding: 32px;
   background: var(--green);
 }
 
-/* Лист бумаги чуть повёрнут — как вложенный документ.
-   При наведении выпрямляется. */
 .paper-sheet {
-  padding: 40px;
+  padding: 32px;
   background: var(--paper);
-  transform: rotate(-1deg);
-  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.18);
-  transition: transform 0.4s ease;
-}
-
-.paper-sheet:hover {
-  transform: rotate(0deg);
 }
 
 .paper-sheet__name {
   font-family: var(--serif);
-  font-size: clamp(56px, 6vw, 96px);
+  font-size: clamp(48px, 5vw, 80px);
   line-height: 1;
 }
 
-/* Список «название — значение» */
 .facts {
   display: grid;
   grid-template-columns: 140px 1fr;
   gap: 10px 20px;
-  margin: 28px 0 32px;
+  margin: 24px 0 28px;
   font-size: 16px;
 }
 
@@ -514,30 +321,26 @@ a:focus-visible,
 
 .source__year {
   font-family: var(--serif);
-  font-size: clamp(96px, 11vw, 180px);
+  font-size: clamp(80px, 9vw, 150px);
   line-height: 0.9;
 }
 
 .source__text {
-  margin-top: 18px;
+  margin-top: 16px;
   font-size: 16px;
 }
 
 
-/* ---------- 9. TYPE ANALYSIS: экспонаты ---------- */
+/* ---------- 8. TYPE ANALYSIS ---------- */
 .exhibits {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--grey);
+  gap: 32px;
 }
 
 .exhibit {
-  padding: 24px 32px 32px 0;
-}
-
-.exhibit + .exhibit {
-  padding-left: 32px;
-  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--grey);
+  padding-top: 20px;
 }
 
 .exhibit__index {
@@ -548,27 +351,14 @@ a:focus-visible,
   text-transform: uppercase;
 }
 
-/* Буква сначала только контуром, при наведении «проявляется» */
 .exhibit__glyph {
-  margin: 16px 0;
+  margin: 12px 0;
   font-family: var(--serif);
-  font-size: clamp(160px, 18vw, 300px);
+  font-size: clamp(140px, 15vw, 240px);
   line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--paper);
-  transition: color 0.5s ease, transform 0.5s ease;
-}
-
-.exhibit:hover .exhibit__glyph {
-  color: var(--paper);
-  transform: scale(1.06);
 }
 
 .exhibit__glyph--red {
-  -webkit-text-stroke-color: var(--red);
-}
-
-.exhibit:hover .exhibit__glyph--red {
   color: var(--red);
 }
 
@@ -577,15 +367,8 @@ a:focus-visible,
   font-size: 16px;
 }
 
-.hint {
-  margin-top: 24px;
-  color: var(--grey);
-  font-size: 13px;
-  font-style: italic;
-}
 
-
-/* ---------- 10. SPECIMENS: алфавит ---------- */
+/* ---------- 9. SPECIMENS ---------- */
 .alphabet {
   display: grid;
   grid-template-columns: repeat(11, 1fr);   /* 33 буквы = 3 ряда по 11 */
@@ -594,7 +377,6 @@ a:focus-visible,
 }
 
 .glyph-cell {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -603,29 +385,18 @@ a:focus-visible,
   border-bottom: 1px solid var(--black);
   font-family: var(--serif);
   font-size: clamp(28px, 3.6vw, 56px);
-  transition: background 0.2s ease, color 0.2s ease;
 }
 
-.glyph-cell:hover {
-  background: var(--black);
-  color: var(--paper);
-}
-
-/* Характерные буквы: красная рамка внутри ячейки */
 .glyph-cell--marked {
   box-shadow: inset 0 0 0 3px var(--red);
 }
 
-.glyph-cell--marked:hover {
-  background: var(--red);
-}
-
 .specimen-line {
-  margin-top: 48px;
+  margin-top: 40px;
   font-family: var(--serif);
-  font-size: clamp(26px, 4.4vw, 64px);
+  font-size: clamp(26px, 4.4vw, 60px);
   letter-spacing: 0.06em;
-  overflow-wrap: anywhere;   /* длинная строка переносится на телефоне */
+  overflow-wrap: anywhere;
 }
 
 .specimen-line--grey {
@@ -640,7 +411,7 @@ a:focus-visible,
 }
 
 
-/* ---------- 11. EVIDENCE GALLERY ---------- */
+/* ---------- 10. EVIDENCE GALLERY ---------- */
 .series-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -648,7 +419,7 @@ a:focus-visible,
   margin-bottom: 24px;
 }
 
-/* Ярлыки серий — как закладки на папках */
+/* Ярлыки серий, как закладки на папках */
 .series-tabs__link {
   padding: 10px 16px 8px;
   background: var(--green);
@@ -664,12 +435,12 @@ a:focus-visible,
 .series-tabs__link:hover,
 .series-tabs__link:focus-visible {
   background: var(--red);
-  transform: translateY(-4px);   /* закладка «приподнимается» */
+  transform: translateY(-4px);
 }
 
 .series {
   padding-top: 56px;
-  scroll-margin-top: 60px;
+  scroll-margin-top: 70px;
 }
 
 .series__title {
@@ -695,47 +466,36 @@ a:focus-visible,
   gap: 20px;
 }
 
-/* Карточка улики — это ссылка: по клику открывается SVG целиком */
+/* Карточка улики. Это <figure>, а не ссылка: по клику ничего не открывается. */
 .evidence {
   position: relative;
-  display: block;
-  text-decoration: none;
 }
 
 .evidence__image {
   display: block;
   width: 100%;
   aspect-ratio: 3 / 4;          /* формат постеров 900 × 1200 */
-  pointer-events: none;         /* клик проходит сквозь картинку на ссылку */
+  pointer-events: none;
   background: #222;
-  transition: transform 0.4s ease, filter 0.4s ease;
+  transition: transform 0.4s ease;
 }
 
-/* Красная рамка анализа, появляется при наведении */
+/* Красная рамка анализа при наведении */
 .evidence::after {
-  content: "Открыть улику";
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   aspect-ratio: 3 / 4;
-  display: flex;
-  align-items: flex-end;
-  padding: 12px;
   border: 3px solid var(--red);
-  color: var(--paper);
-  background: linear-gradient(transparent 60%, rgba(23, 25, 24, 0.85));
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
   opacity: 0;
   transform: scale(1.04);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
 }
 
-.evidence:hover::after,
-.evidence:focus-visible::after {
+.evidence:hover::after {
   opacity: 1;
   transform: scale(1);
 }
@@ -762,17 +522,17 @@ a:focus-visible,
 }
 
 
-/* ---------- 12. ЗАКЛЮЧЕНИЕ ---------- */
+/* ---------- 11. ЗАКЛЮЧЕНИЕ ---------- */
 .stamp-small {
   margin-left: auto;
-  padding: 8px 18px;
+  padding: 6px 16px;
   border: 3px solid var(--red);
   color: var(--red);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  transform: rotate(-6deg);
+  transform: rotate(-4deg);
 }
 
 .conclusions {
@@ -790,14 +550,13 @@ a:focus-visible,
   font-size: 17px;
 }
 
-/* Крупный номер вывода — из счётчика CSS */
 .conclusions li::before {
   content: "0" counter(item);
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: var(--red);
   font-family: var(--serif);
-  font-size: 56px;
+  font-size: 48px;
   line-height: 1;
 }
 
@@ -805,17 +564,21 @@ a:focus-visible,
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-top: 72px;
+  margin-top: 64px;
+}
+
+.section--paper .button:hover {
+  color: var(--paper);
 }
 
 
-/* ---------- 13. ПОДВАЛ ---------- */
+/* ---------- 12. ПОДВАЛ ---------- */
 .site-footer {
   display: grid;
   grid-template-columns: auto 1fr 1.6fr;
   align-items: end;
   gap: 48px;
-  padding: 64px var(--side) 48px;
+  padding: 56px var(--side) 48px;
   border-top: 1px solid var(--line);
   color: var(--grey);
   font-size: 14px;
@@ -823,7 +586,7 @@ a:focus-visible,
 
 .site-footer__big {
   font-family: var(--serif);
-  font-size: clamp(64px, 8vw, 120px);
+  font-size: clamp(56px, 7vw, 100px);
   line-height: 0.8;
   color: var(--paper);
 }
@@ -841,27 +604,7 @@ a:focus-visible,
 }
 
 
-/* ---------- 14. ПОЯВЛЕНИЕ ПРИ ПРОКРУТКЕ ----------
-   Работает в браузерах, которые поддерживают animation-timeline
-   (Chrome, Edge). В остальных всё просто видно сразу. */
-@supports (animation-timeline: view()) {
-  .section-head,
-  .evidence,
-  .exhibit,
-  .conclusions li {
-    animation: reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 40%;
-  }
-
-  @keyframes reveal {
-    from { opacity: 0; transform: translateY(40px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-}
-
-
-/* ---------- 15. АДАПТИВ ---------- */
+/* ---------- 13. АДАПТИВ ---------- */
 
 /* Планшет */
 @media (max-width: 1100px) {
@@ -877,11 +620,11 @@ a:focus-visible,
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Улики листаются вбок, как карточки в архиве */
+  /* Улики листаются вбок пальцем */
   .evidence-row {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;   /* карточки «защёлкиваются» */
+    scroll-snap-type: x mandatory;
     padding-bottom: 12px;
   }
 
@@ -901,38 +644,16 @@ a:focus-visible,
     font-size: 16px;
   }
 
-  .site-header {
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
-
-  /* Меню листается вбок пальцем */
   .site-header__menu {
-    min-width: 0;              /* разрешаем меню быть уже своего содержимого */
+    min-width: 0;
     gap: 20px;
-    overflow-x: auto;
+    overflow-x: auto;      /* меню листается вбок */
     padding: 6px 0;
-  }
-
-  .site-header__logo {
-    font-size: 22px;
-  }
-
-  .hero {
-    min-height: auto;
-    padding-top: 32px;
-  }
-
-  .hero__stamp {
-    position: static;
-    align-self: flex-start;
-    margin-top: 24px;
   }
 
   .hero__bottom {
     flex-direction: column;
     align-items: stretch;
-    padding-top: 32px;
   }
 
   .case-card {
@@ -940,14 +661,13 @@ a:focus-visible,
   }
 
   .section {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
 
   .section-head {
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 40px;
   }
 
   .stamp-small {
@@ -972,13 +692,6 @@ a:focus-visible,
     grid-template-columns: 1fr;
   }
 
-  .exhibit,
-  .exhibit + .exhibit {
-    padding: 24px 0;
-    border-left: none;
-    border-bottom: 1px solid var(--line);
-  }
-
   .alphabet {
     grid-template-columns: repeat(6, 1fr);
   }
@@ -997,13 +710,9 @@ a:focus-visible,
   }
 }
 
-
-/* ---------- 16. ЕСЛИ АНИМАЦИИ ВЫКЛЮЧЕНЫ В СИСТЕМЕ ---------- */
+/* Если анимации выключены в системе */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
+  * {
     transition: none !important;
     scroll-behavior: auto !important;
   }
